@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WeatherData} from "../../model/weather";
-import {HttpClient} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {WeatherService} from "../../services/weather.service";
+import {catchError, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-weather',
@@ -10,18 +10,17 @@ import {map, Observable, tap} from "rxjs";
 })
 export class WeatherComponent implements OnInit {
 
-  public data: WeatherData | undefined;
+  public data: Observable<WeatherData | undefined> | undefined;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private weatherService: WeatherService) {
   }
 
   ngOnInit(): void {
-    let observable: Observable<any> = this.httpClient.get('https://api.openweathermap.org/data/2.5/weather?q=Munich,de&units=metric&APPID=faf17d6bfe1477a97755d5134779e59c');
-    observable.pipe(
-      tap(dataFromServer => console.log(dataFromServer)),
-      map(dataFromServer => dataFromServer.main as WeatherData),
-      tap(weatherData => console.log(weatherData)),
-    ).subscribe(weatherData => this.data = weatherData)
+    //this.weatherService.fetchWeatherData().subscribe(weatherData => this.data = weatherData, error => console.error(error))
+    this.data = this.weatherService.fetchWeatherData().pipe(catchError(err => {
+      console.error(err);
+      return of(undefined)
+    }))
   }
 
 }
