@@ -4,6 +4,8 @@ import {WeatherComponent} from './weather.component';
 import {WeatherService} from "../../services/weather.service";
 import {of, throwError} from "rxjs";
 import {By} from "@angular/platform-browser";
+import { MockPipe } from "ng-mocks";
+import { DegreePipe } from "../../pipes/degree.pipe";
 
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
@@ -15,7 +17,7 @@ describe('WeatherComponent', () => {
     weatherServiceMock = {fetchWeatherData: jest.fn()}
     weatherServiceMock.fetchWeatherData.mockReturnValue(of(expectedWeatherData))
     await TestBed.configureTestingModule({
-      declarations: [WeatherComponent],
+      declarations: [WeatherComponent, MockPipe(DegreePipe, (value) => `${value}`)],
       providers: [
         {provide: WeatherService, useValue: weatherServiceMock}
       ]

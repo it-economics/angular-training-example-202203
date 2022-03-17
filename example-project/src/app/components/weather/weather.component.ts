@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WeatherData} from "../../model/weather";
 import {WeatherService} from "../../services/weather.service";
-import {catchError, Observable, of} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-weather',
@@ -17,7 +17,9 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit(): void {
     //this.weatherService.fetchWeatherData().subscribe(weatherData => this.data = weatherData, error => console.error(error))
-    this.data = this.weatherService.fetchWeatherData().pipe(catchError(err => {
+    this.data = this.weatherService.fetchWeatherData().pipe(
+      // map(weatherdata => { return { ...weatherdata, temp: undefined } }),
+      catchError(err => {
       console.error(err);
       return of(undefined)
     }))

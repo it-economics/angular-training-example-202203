@@ -1,5 +1,5 @@
 export interface WeatherData {
-  temp: number
+  temp: number | undefined;
   temp_min: number
   temp_max: number
 }

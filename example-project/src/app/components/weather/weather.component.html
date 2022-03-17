@@ -1,5 +1,5 @@
 <ng-container *ngIf="data | async as weatherData">
-  <p id="temp">Aktuelle Temperatur: {{weatherData?.temp}}</p>
-  <p id="temp_min">Min. Temperatur: {{weatherData?.temp_min}}</p>
-  <p id="temp_max">Max. Temperatur: {{weatherData?.temp_max}}</p>
+  <p id="temp">Aktuelle Temperatur: {{weatherData?.temp | degree }}</p>
+  <p id="temp_min">Min. Temperatur: {{weatherData?.temp_min | degree}}</p>
+  <p id="temp_max">Max. Temperatur: {{weatherData?.temp_max | degree}}</p>
 </ng-container>
