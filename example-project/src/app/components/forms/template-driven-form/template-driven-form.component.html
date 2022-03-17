@@ -1,0 +1,9 @@
+<h3>Template Driven Form</h3>
+<form #nameForm="ngForm" (ngSubmit)="onSubmit()">
+  <input [(ngModel)]="user.firstname" name="firstname" #firstnameInput="ngModel" required>
+  <div *ngIf="!firstnameInput.valid">Der Name darf nicht leer sein!</div>
+  <input [(ngModel)]="user.lastname" name="lastname">
+  <button type="submit">Submit1</button>
+  <button type="button" (click)="onClick()">Click</button>
+  <button type="reset">Reset</button>
+</form>

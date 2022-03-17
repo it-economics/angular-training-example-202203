@@ -5,8 +5,11 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './components/hello/hello.component';
 import { NameInputComponent } from './components/name-input/name-input.component';
 import { WeatherComponent } from './components/weather/weather.component';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { DegreePipe } from './pipes/degree.pipe';
+import { ReactiveFormComponent } from './components/forms/reactive-form/reactive-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TemplateDrivenFormComponent } from './components/forms/template-driven-form/template-driven-form.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,12 @@ import { DegreePipe } from './pipes/degree.pipe';
     HelloComponent,
     NameInputComponent,
     WeatherComponent,
-    DegreePipe
+    DegreePipe,
+    ReactiveFormComponent,
+    TemplateDrivenFormComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

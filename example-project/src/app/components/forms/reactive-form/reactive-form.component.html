@@ -1,0 +1,9 @@
+<h3>reactive-form</h3>
+<form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
+  <input formControlName="firstname" />
+  <div *ngIf="isNameRequired(nameForm.controls['firstname']) && !isNamePristine(nameForm.controls['firstname'])">Name darf nicht leer sein</div>
+  <div *ngIf="isNameForbidden(nameForm.controls['firstname'])">Der Name ist nicht erlaubt</div>
+  <input formControlName="lastname" />
+  <button type="submit" [disabled]="!nameForm.valid">Submit</button>
+</form>
+<p *ngIf="submitted">{{nameValue}}</p>
