@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
+import {JokeService} from "../../services/joke.service";
 
 @Component({
   selector: 'app-joke',
@@ -11,21 +12,15 @@ export class JokeComponent implements OnInit {
 
   public joke: string | undefined
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private jokeService: JokeService) {
   }
 
   ngOnInit(): void {
   }
 
   showJoke(): void {
-    this.httpClient.get('http://api.icndb.com/jokes/random').pipe(
-      map(response => response as ChuckNorrisApiResponse),
-      map((response: ChuckNorrisApiResponse) => response.value.joke)
-    ).subscribe((joke: string) => this.joke = joke)
+    this.jokeService.getRandomJoke()
+      .subscribe((joke: string) => this.joke = joke)
   }
 
-}
-
-interface ChuckNorrisApiResponse {
-  value: { id: number, joke: string }
 }
