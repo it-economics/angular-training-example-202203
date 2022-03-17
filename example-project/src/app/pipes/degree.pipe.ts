@@ -8,5 +8,4 @@ export class DegreePipe implements PipeTransform {
   transform(value: number | undefined): string {
     return value ? value + " °C" : "";
   }
-
 }

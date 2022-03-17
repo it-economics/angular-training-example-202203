@@ -17,7 +17,7 @@ describe('WeatherComponent', () => {
     weatherServiceMock = {fetchWeatherData: jest.fn()}
     weatherServiceMock.fetchWeatherData.mockReturnValue(of(expectedWeatherData))
     await TestBed.configureTestingModule({
-      declarations: [WeatherComponent, MockPipe(DegreePipe, (value) => `${value}`)],
+      declarations: [WeatherComponent, MockPipe(DegreePipe, (value) => `${value} mocked Pipe`)],
       providers: [
         {provide: WeatherService, useValue: weatherServiceMock}
       ]
@@ -53,6 +53,6 @@ describe('WeatherComponent', () => {
 
   it('shows weather data',()=>{
     const tempParagraphTag: HTMLElement = fixture.debugElement.query(By.css('#temp')).nativeElement
-    expect(tempParagraphTag.textContent).toEqual(`Aktuelle Temperatur: ${expectedWeatherData.temp}`)
+    expect(tempParagraphTag.textContent).toEqual(`Aktuelle Temperatur: ${expectedWeatherData.temp} mocked Pipe`)
   })
 });
