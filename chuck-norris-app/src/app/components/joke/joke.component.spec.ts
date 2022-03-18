@@ -4,6 +4,8 @@ import {JokeComponent} from './joke.component';
 import {JokeService} from "../../services/joke.service";
 import {of} from "rxjs";
 import {By} from "@angular/platform-browser";
+import {MockPipe} from "ng-mocks";
+import {QuotationMarkPipe} from "../../pipes/quotation-mark.pipe";
 
 describe('JokeComponent', () => {
   let component: JokeComponent;
@@ -16,7 +18,7 @@ describe('JokeComponent', () => {
       providers: [
         {provide: JokeService, useValue: jokeServiceMock}
       ],
-      declarations: [JokeComponent]
+      declarations: [JokeComponent, MockPipe(QuotationMarkPipe, (value) => value+'_mocked')]
     })
       .compileComponents();
   });
@@ -36,6 +38,6 @@ describe('JokeComponent', () => {
     button.click();
     fixture.detectChanges();
     const paragraphWithJoke = fixture.debugElement.query(By.css('p')).nativeElement as HTMLElement
-    expect(paragraphWithJoke.textContent).toEqual('expectedJoke');
+    expect(paragraphWithJoke.textContent).toEqual('expectedJoke_mocked');
   })
 });
