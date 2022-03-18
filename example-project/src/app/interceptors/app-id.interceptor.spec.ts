@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppIdInterceptor } from './app-id.interceptor';
 
-fdescribe('AppIdInterceptor', () => {
+describe('AppIdInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [AppIdInterceptor],
