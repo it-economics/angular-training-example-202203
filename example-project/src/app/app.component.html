@@ -1,7 +1,18 @@
-<app-name-input (submitted)="changeName($event)"></app-name-input>
+<!-- <app-name-input (submitted)="changeName($event)"></app-name-input>
 <button (click)="sayHello()">say hello</button>
 <app-hello *ngIf="showHelloComponent" [name]="username"></app-hello>
-<!-- <app-hello [names]="username"></app-hello> -->
+<!-- <app-hello [names]="username"></app-hello>
 <app-weather></app-weather>
 <app-reactive-form></app-reactive-form>
-<app-template-driven-form></app-template-driven-form>
+<app-template-driven-form></app-template-driven-form> -->
+
+
+<ul>
+  <li><a routerLink='/weather' routerLinkActive="active" >Weather</a></li>
+  <li><a routerLink='/reactive' routerLinkActive="active" >Reactive</a></li>
+  <li><a routerLink='/template' routerLinkActive="active" >Template</a></li>
+</ul>
+
+<h3>Welcome to Angular Example</h3>
+
+<router-outlet></router-outlet>
