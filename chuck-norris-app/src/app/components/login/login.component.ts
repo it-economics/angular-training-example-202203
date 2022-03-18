@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loginError?: string;
 
   @Output()
   loginSuccessful: EventEmitter<void> = new EventEmitter<void>()
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       if(this.loginForm.controls['password'].value === 'secret'){
         this.loginSuccessful.next();
+      }else {
+        this.loginError='Falsche Zugangsdaten'
       }
     }
   }

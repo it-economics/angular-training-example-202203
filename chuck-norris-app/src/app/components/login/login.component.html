@@ -1,7 +1,12 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()" >
-  <div >BenutzerName</div>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div>BenutzerName</div>
   <input type="text" formControlName="userName">
-  <div >Passwort</div>
+  <div>Passwort</div>
   <input type="password" formControlName="password">
   <button type="submit">Login</button>
 </form>
+<p style="color: red">{{loginError}}</p>
+<p style="color: red" *ngIf="loginForm.controls['userName']?.dirty && loginForm.controls['userName']?.errors?.['required']">Der Benutzername muss angegeben
+  werden!</p>
+<p style="color: red" *ngIf="loginForm.controls['password']?.dirty && loginForm.controls['password']?.errors?.['required']">Das Passwort muss angegeben
+  werden!</p>
