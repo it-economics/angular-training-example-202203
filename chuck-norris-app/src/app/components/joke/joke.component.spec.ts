@@ -1,16 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { JokeComponent } from './joke.component';
+import {JokeComponent} from './joke.component';
+import {JokeService} from "../../services/joke.service";
+import {of} from "rxjs";
+import {By} from "@angular/platform-browser";
 
 describe('JokeComponent', () => {
   let component: JokeComponent;
   let fixture: ComponentFixture<JokeComponent>;
+  let jokeServiceMock;
 
   beforeEach(async () => {
+    jokeServiceMock = {getRandomJoke: () => of('expectedJoke')}
     await TestBed.configureTestingModule({
-      declarations: [ JokeComponent ]
+      providers: [
+        {provide: JokeService, useValue: jokeServiceMock}
+      ],
+      declarations: [JokeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +30,12 @@ describe('JokeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('calls service on button click', () => {
+    const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+    const paragraphWithJoke = fixture.debugElement.query(By.css('p')).nativeElement as HTMLElement
+    expect(paragraphWithJoke.textContent).toEqual('expectedJoke');
+  })
 });

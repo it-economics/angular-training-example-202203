@@ -16,6 +16,6 @@ export class JokeService {
     )
   }
 }
-interface ChuckNorrisApiResponse {
+export interface ChuckNorrisApiResponse {
   value: { id: number, joke: string }
 }

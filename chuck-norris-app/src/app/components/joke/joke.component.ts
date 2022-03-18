@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs";
 import {JokeService} from "../../services/joke.service";
 
 @Component({

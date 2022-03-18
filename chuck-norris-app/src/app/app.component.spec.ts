@@ -1,6 +1,9 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
+import {MockComponent} from "ng-mocks";
+import {JokeComponent} from "./components/joke/joke.component";
+import {By} from "@angular/platform-browser";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +12,7 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, MockComponent(JokeComponent)
       ],
     }).compileComponents();
   });
@@ -20,16 +23,12 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'chuck-norris-app'`, () => {
+  it('displays the joke component', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('chuck-norris-app');
-  });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('chuck-norris-app app is running!');
-  });
+    const jokeTag = fixture.debugElement.query(By.directive(JokeComponent))
+    expect(jokeTag).toBeDefined();
+  })
+
+
 });
