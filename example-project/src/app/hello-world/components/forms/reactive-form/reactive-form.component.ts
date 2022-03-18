@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { forbiddenNameValidator } from '../../../validadors/forbiddenName.validator';
+import {forbiddenNameValidator} from "../../../validadors/forbiddenName.validator";
 
 @Component({
   selector: 'app-reactive-form',
