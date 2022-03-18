@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginError?: string;
 
-  @Output()
-  loginSuccessful: EventEmitter<void> = new EventEmitter<void>()
-
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, private authenticatioService: AuthenticationService, private router: Router) {
     this.loginForm = formBuilder.group({
-      userName: formBuilder.control('',[Validators.required]),
-      password: formBuilder.control('',[Validators.required])
+      userName: formBuilder.control('', [Validators.required]),
+      password: formBuilder.control('', [Validators.required])
     })
   }
 
@@ -25,12 +24,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.loginForm.valid){
-      if(this.loginForm.controls['password'].value === 'secret'){
-        this.loginSuccessful.next();
-      }else {
-        this.loginError='Falsche Zugangsdaten'
-      }
+    if (this.loginForm.valid) {
+      this.authenticatioService.login(this.loginForm.controls['userName'].value, this.loginForm.controls['password'].value).subscribe(loginSuccessful => {
+        if (loginSuccessful) {
+          this.router.navigate(['/'])
+        } else {
+          this.loginError = 'Falsche Zugangsdaten'
+        }
+      })
+
     }
   }
 }
