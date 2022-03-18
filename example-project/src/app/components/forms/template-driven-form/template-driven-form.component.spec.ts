@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { TemplateDrivenFormComponent } from './template-driven-form.component';
 
@@ -8,9 +9,9 @@ describe('TemplateDrivenFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TemplateDrivenFormComponent ]
-    })
-    .compileComponents();
+      declarations: [TemplateDrivenFormComponent],
+      imports: [FormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
