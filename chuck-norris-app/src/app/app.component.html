@@ -1,1 +1,2 @@
-<app-joke></app-joke>
+<app-joke *ngIf="userIsLoggedIn"></app-joke>
+<app-login *ngIf="!userIsLoggedIn" (loginSuccessful)="showJokeComponent()"></app-login>
